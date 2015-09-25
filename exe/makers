@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 require 'yaml'
-require './lib/fetch_pull_requests'
+require_relative '../lib/fetch_pull_requests'
 
 module MakersToolbelt
 
@@ -30,7 +30,7 @@ module MakersToolbelt
     end
 
     def load_command_map
-      YAML.load(File.read('./command_map.yml'))
+      YAML.load(File.read(File.expand_path('../../command_map.yml', __FILE__)))
     end
   end
 end

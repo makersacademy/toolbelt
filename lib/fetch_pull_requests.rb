@@ -17,8 +17,10 @@ module MakersToolbelt
 
         puts pulls
         pulls.map { |p| [p.head.repo.owner.login, p.head.repo.html_url] }.each do |name, url|
+          puts "adding #{name}"
           `git remote add #{name} #{url}`
-          puts `git fetch #{name}`
+          puts "fetching #{url}"
+          `git fetch #{name}`
         end
       end
 
@@ -42,10 +44,12 @@ module MakersToolbelt
       private
 
       def open_pull_requests
+        puts "fetching open pull requests from #{repo}..."
         client.pull_requests repo, state: 'open', per_page: 100
       end
 
       def closed_pull_requests
+        puts "fetching closed pull requests from #{repo}..."
         pulls = client.pull_requests repo, state: 'closed', per_page: 100
         pulls.concat client.last_response.rels[:next].get.data
       end
