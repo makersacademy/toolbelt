@@ -9,19 +9,27 @@ module MakersToolbelt
 
     describe 'repo_from_remote_path' do
       it 'returns the repo from an SSH path ignoring leading spaces' do
-        expect(subject.repo_from_remote_path('    git@github.com:makersacademy/toolbelt.git\n')).to eq 'makersacademy/toolbelt'
+        expect(subject.repo_from_remote_path("    git@github.com:makersacademy/toolbelt.git\n")).to eq 'makersacademy/toolbelt'
       end
 
       it 'returns the repo from an SSH Fetch URL ignoring leading spaces' do
-        expect(subject.repo_from_remote_path('    Fetch URL: git@github.com:makersacademy/toolbelt.git\n')).to eq 'makersacademy/toolbelt'
+        expect(subject.repo_from_remote_path("    Fetch URL: git@github.com:makersacademy/toolbelt.git\n")).to eq 'makersacademy/toolbelt'
       end
 
-      it 'returns the repo from an HTTP path ignoring leading spaces' do
-        expect(subject.repo_from_remote_path('    https://github.com/makersacademy/toolbelt.git\n')).to eq 'makersacademy/toolbelt'
+      it 'returns the repo from an HTTP path' do
+        expect(subject.repo_from_remote_path("http://github.com/makersacademy/toolbelt\n")).to eq 'makersacademy/toolbelt'
       end
 
       it 'returns the repo from an HTTP Fetch URL ignoring leading spaces' do
-        expect(subject.repo_from_remote_path('    Fetch URL: https://github.com/makersacademy/toolbelt.git\n')).to eq 'makersacademy/toolbelt'
+        expect(subject.repo_from_remote_path("    Fetch URL: http://github.com/makersacademy/toolbelt\n")).to eq 'makersacademy/toolbelt'
+      end
+
+      it 'returns the repo from an HTTPS path ignoring leading spaces' do
+        expect(subject.repo_from_remote_path("    https://github.com/makersacademy/toolbelt.git\n")).to eq 'makersacademy/toolbelt'
+      end
+
+      it 'returns the repo from an HTTPS Fetch URL ignoring leading spaces' do
+        expect(subject.repo_from_remote_path("    Fetch URL: https://github.com/makersacademy/toolbelt.git\n")).to eq 'makersacademy/toolbelt'
       end
     end
   end
