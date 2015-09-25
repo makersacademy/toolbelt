@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'yaml'
-require_relative '../lib/fetch_pull_requests'
+require 'makers_toolbelt'
 
 module MakersToolbelt
 
