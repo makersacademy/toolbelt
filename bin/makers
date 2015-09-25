@@ -1,0 +1,38 @@
+#!/usr/bin/ruby
+
+require 'yaml'
+require './lib/fetch_pull_requests'
+
+module MakersToolbelt
+
+  COMMAND_MAP = {
+    fetch_pull_requests: FetchPullRequests
+  }
+
+  class << self
+    def run(command, *args)
+      map = command_map[command]
+
+      fail "Unknown command #{command}" unless map
+
+      args_hash = map['args'].each_with_index.inject({}) do |hash, arg_with_index|
+        key, index = *arg_with_index
+        hash[key] = args[index]
+        hash
+      end
+      eval(map['module']).call(args_hash)
+    end
+
+    private
+
+    def command_map
+      @command_map ||= load_command_map
+    end
+
+    def load_command_map
+      YAML.load(File.read('./command_map.yml'))
+    end
+  end
+end
+
+MakersToolbelt.run(ARGV[0], *ARGV.slice(1, ARGV.length - 1))
