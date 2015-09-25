@@ -5,6 +5,8 @@ module MakersToolbelt
     OPEN_SWITCHES = ['-a', '--all', '-o', '--open']
     CLOSED_SWITCHES = ['-a', '--all', '-c', '--closed']
 
+    GITHUB_REMOTE_REGEX = /github\.com(?::|\/)?(.+\/[\w\-]+)(?:\.git|\/)?\n/
+
     attr_reader :options, :filter
 
     def initialize(options = {})
@@ -32,8 +34,10 @@ module MakersToolbelt
     end
 
     def repo_from_remote_path(path)
-      @regex ||= /\s*(?:Fetch URL: )?(?:https?:\/\/|git@)github\.com(?::|\/)?(.*\/[\w\-]*)(?:\.git)?\n/
+      @regex ||= GITHUB_REMOTE_REGEX
       @regex.match(path).captures.first
+    rescue
+      fail NotFoundError.new('Could not find remote origin')
     end
 
     def include_open?

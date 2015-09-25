@@ -7,6 +7,10 @@ module MakersToolbelt
       expect(subject.repo).to eq 'makersacademy/toolbelt'
     end
 
+    it 'fails when the origin remote cannot be found' do
+      expect{subject.repo_from_remote_path('xxx')}.to raise_error NotFoundError
+    end
+
     describe 'repo_from_remote_path' do
       it 'returns the repo from an SSH path ignoring leading spaces' do
         expect(subject.repo_from_remote_path("    git@github.com:makersacademy/toolbelt.git\n")).to eq 'makersacademy/toolbelt'
@@ -21,7 +25,7 @@ module MakersToolbelt
       end
 
       it 'returns the repo from an HTTP Fetch URL ignoring leading spaces' do
-        expect(subject.repo_from_remote_path("    Fetch URL: http://github.com/makersacademy/toolbelt\n")).to eq 'makersacademy/toolbelt'
+        expect(subject.repo_from_remote_path("  Fetch URL: http://github.com/makersacademy/bowling-challenge/\n")).to eq 'makersacademy/bowling-challenge'
       end
 
       it 'returns the repo from an HTTPS path ignoring leading spaces' do
