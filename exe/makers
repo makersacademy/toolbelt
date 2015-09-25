@@ -1,13 +1,9 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 require 'yaml'
 require_relative '../lib/fetch_pull_requests'
 
 module MakersToolbelt
-
-  COMMAND_MAP = {
-    fetch_pull_requests: FetchPullRequests
-  }
 
   class << self
     def run(command, *args)
@@ -17,10 +13,11 @@ module MakersToolbelt
 
       args_hash = map['args'].each_with_index.inject({}) do |hash, arg_with_index|
         key, index = *arg_with_index
-        hash[key] = args[index]
+        hash[key.to_sym] = args[index]
         hash
       end
-      eval(map['module']).call(args_hash)
+      runner = eval(map['class']).new(args_hash)
+      runner.run
     end
 
     private

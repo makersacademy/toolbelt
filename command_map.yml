@@ -1,3 +1,3 @@
 fetch_pull_requests:
-  module: FetchPullRequests
-  args: [include]
+  class: FetchPullRequests
+  args: [filter]
