@@ -81,7 +81,24 @@ module MakersToolbelt
     end
 
     def client
-      @client ||= Octokit::Client.new client_id: ENV['GITHUB_CLIENT_ID'], client_secret: ENV['GITHUB_CLIENT_SECRET']
+      @client ||= create_client
+    end
+
+    def create_client
+      token = ENV['MAKERS_TOOLBELT_GITHUB_TOKEN']
+      if token
+        Octokit::Client.new access_token: token
+      else
+        create_client_from_config
+      end
+    end
+
+    def create_client_from_config
+      print 'Enter your github username: '
+      username = STDIN.gets.chomp
+      print "Enter GitHub password for #{username}: "
+      password = STDIN.noecho(&:gets).chomp
+      Octokit::Client.new login: username, password: password
     end
   end
 
