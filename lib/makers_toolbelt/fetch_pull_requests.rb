@@ -52,13 +52,28 @@ module MakersToolbelt
 
     def open_pull_requests
       puts "fetching open pull requests from #{repo}..."
-      client.pull_requests repo, state: 'open', per_page: 100
+      fetch_pull_requests('open')
     end
 
     def closed_pull_requests
       puts "fetching closed pull requests from #{repo}..."
-      pulls = client.pull_requests repo, state: 'closed', per_page: 100
-      pulls.concat client.last_response.rels[:next].get.data
+      fetch_pull_requests('closed')
+    end
+
+    def fetch_pull_requests(state)
+      pulls = client.pull_requests repo, state: state, per_page: 100
+      fetch_more_pages(pulls)
+    rescue StandardError => e
+      puts "Error occurred while fetching pull requests: #{e.message}"
+    ensure
+      pulls
+    end
+
+    def fetch_more_pages(into_array)
+      while response = client.last_response.rels[:next] do
+        into_array << response.get.data
+      end
+      into_array
     end
 
     def origin_path

@@ -1,8 +1,12 @@
-require './lib/fetch_pull_requests'
+require './lib/makers_toolbelt'
 
 module MakersToolbelt
 
   describe FetchPullRequests do
+    before do
+      allow(subject).to receive('origin_path').and_return "  Fetch URL: git@github.com:makersacademy/toolbelt.git\n"
+    end
+
     it 'returns the repo name from the origin remote' do
       expect(subject.repo).to eq 'makersacademy/toolbelt'
     end
