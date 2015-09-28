@@ -5,8 +5,10 @@ For automating common coach tasks
 
 In order to avoid rate limits please set up environment variables GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET
 
+```
 export GITHUB_CLIENT_ID=<INSERT_YOUR_ID>
 export GITHUB_CLIENT_SECRET=<INSERT_YOUR_SECRET>
+```
 
 Register an app to get a client ID and SECRET from Github:
 
