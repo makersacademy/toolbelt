@@ -11,7 +11,7 @@ To avoid entering your username and password each time, create a personal token 
 export MAKERS_TOOLBELT_GITHUB_TOKEN=<insert_your_token>
 ```
 
-## 1) Grabbing all the pull requests for a particular challenge respoistory
+## 1) Grabbing all the pull requests for a particular challenge repository
 
 ```sh
 $ # cd to makers challenge repo of your choice (e.g. makersacademy/chitter_challenge )
