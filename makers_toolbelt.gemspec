@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'makers_toolbelt'
-  s.version = '0.0.6'
+  s.version = '0.0.7'
   s.summary = 'Makers Academy command toolbelt'
   s.authors = ['Ben Forrest', 'Sam Joseph']
   s.files = [
