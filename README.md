@@ -6,7 +6,7 @@ For automating common command line tasks
 ```sh
 $ gem install makers_toolbelt
 ```
-To avoid entering your username and password each time, create a personal token on GitHub as copy this to an environment variable:
+To avoid entering your username and password each time, create a personal token on GitHub and copy this to an environment variable:
 ```
 export MAKERS_TOOLBELT_GITHUB_TOKEN=<insert_your_token>
 ```
