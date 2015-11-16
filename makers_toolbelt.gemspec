@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'makers_toolbelt'
-  s.version = '0.0.7'
+  s.version = '0.0.8'
   s.summary = 'Makers Academy command toolbelt'
   s.authors = ['Ben Forrest', 'Sam Joseph']
   s.files = [
@@ -8,5 +8,6 @@ Gem::Specification.new do |s|
     'command_map.yml',
     'lib/makers_toolbelt/fetch_pull_requests.rb'
   ]
+  s.add_runtime_dependency 'octokit'
   s.executables << 'makers'
 end
