@@ -4,3 +4,4 @@ ruby '2.2.3'
 
 gem 'octokit'
 gem 'commander'
+gem 'one_factorization'
