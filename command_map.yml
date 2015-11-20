@@ -3,4 +3,4 @@ fetch_pull_requests:
   args: [filter]
 generate_pairs:
   class: GeneratePairs
-  args: [path]
+  args: [source]
