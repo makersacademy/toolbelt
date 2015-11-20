@@ -70,8 +70,11 @@ module MakersToolbelt
     end
 
     def fetch_more_pages(into_array)
-      while response = client.last_response.rels[:next] do
-        into_array << response.get.data
+      next_page = client.last_response.rels[:next]
+      while next_page do
+        response = next_page.get
+        into_array << response.data
+        next_page = response.rels[:next]
       end
       into_array
     end
