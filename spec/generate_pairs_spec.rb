@@ -6,7 +6,7 @@ module MakersToolbelt
 
   describe GeneratePairs do
     let(:source) { READ_PATH }
-    subject { GeneratePairs.new(source: source) }
+    subject { GeneratePairs.new({source: source}) }
 
     before(:all) do
       File.delete(RESULT_PATH) if File.exist?(RESULT_PATH)

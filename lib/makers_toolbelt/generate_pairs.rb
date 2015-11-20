@@ -10,13 +10,14 @@ class GeneratePairs
     File.readlines(file_path).map(&:strip)
   end
 
-  def initialize(source:)
-    @source = source
+  def initialize(options = {})
+    @source = options[:source]
   end
 
   def run
     names = GeneratePairs.load_names(source)
     file = File.new(path, 'w')
+    puts "Pair assignments created in file #{path}"
     begin
       file.write names.one_factorize.to_json
     ensure
