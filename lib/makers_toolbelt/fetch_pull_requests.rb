@@ -94,7 +94,7 @@ module MakersToolbelt
     end
 
     def create_client_from_config
-      print 'Enter your github username: '
+      print 'Enter your GitHub username: '
       username = STDIN.gets.chomp
       print "Enter GitHub password for #{username}: "
       password = STDIN.noecho(&:gets).chomp
