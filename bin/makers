@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'makers_toolbelt'
+require_relative '../lib/makers_toolbelt'
 
 module MakersToolbelt
 
