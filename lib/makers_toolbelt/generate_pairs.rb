@@ -1,14 +1,27 @@
+require 'one_factorization'
+require 'json'
+
 class GeneratePairs
   FILE_EXTENSION = 'pairs'
 
   attr_reader :source
+
+  def self.load_names(file_path)
+    File.readlines(file_path).map(&:strip)
+  end
 
   def initialize(source:)
     @source = source
   end
 
   def run
-    File.new(path, 'w')
+    names = GeneratePairs.load_names(source)
+    file = File.new(path, 'w')
+    begin
+      file.write names.one_factorize.to_json
+    ensure
+      file.close
+    end
   end
 
   def path
@@ -22,6 +35,6 @@ class GeneratePairs
   end
 
   def filename
-      "#{File.basename(source)}.#{FILE_EXTENSION}"
+    "#{File.basename(source)}.#{FILE_EXTENSION}"
   end
 end

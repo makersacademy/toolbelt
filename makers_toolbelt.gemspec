@@ -6,7 +6,8 @@ Gem::Specification.new do |s|
   s.files = [
     'lib/makers_toolbelt.rb',
     'command_map.yml',
-    'lib/makers_toolbelt/fetch_pull_requests.rb'
+    'lib/makers_toolbelt/fetch_pull_requests.rb',
+    'lib/makers_toolbelt/generate_pairs.rb'
   ]
   s.add_runtime_dependency 'octokit'
   s.add_runtime_dependency 'one_factorization'
