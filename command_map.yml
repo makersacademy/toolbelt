@@ -1,3 +1,6 @@
 fetch_pull_requests:
   class: FetchPullRequests
   args: [filter]
+generate_pairs:
+  class: GeneratePairs
+  args: [source]
