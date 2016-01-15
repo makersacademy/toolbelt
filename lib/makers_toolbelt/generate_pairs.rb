@@ -16,12 +16,9 @@ class GeneratePairs
 
   def run
     names = GeneratePairs.load_names(source)
-    file = File.new(path, 'w')
-    puts "Pair assignments created in file #{path}"
-    begin
-      file.write names.one_factorize.to_json
-    ensure
-      file.close
+    File.open(path, 'w') do |file|
+      puts "Pair assignments created in file #{path}"
+      file.write names.one_factorize.shuffle.to_json
     end
   end
 
