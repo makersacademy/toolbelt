@@ -46,12 +46,13 @@ module MakersToolbelt
     describe 'result' do
       it 'contains a JSON formatted one-factorization of the names in the file' do
         names = GeneratePairs.load_names(READ_PATH)
+
+        allow(GeneratePairs).to receive(:load_names).and_return(double(one_factorize: double(shuffle: names.one_factorize)))
         expected = names.one_factorize
         subject.run
         result = JSON.parse(File.read(RESULT_PATH))
         expect(result).to eq expected
       end
     end
-
   end
 end
