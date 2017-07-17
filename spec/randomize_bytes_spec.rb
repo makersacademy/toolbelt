@@ -10,13 +10,14 @@ module MakersToolbelt
     it 'raises error if number_of_bytes not provided' do
       cohort_id = 1
       options = {number_of_bytes: nil, cohort_id: cohort_id}
-      expect{RandomizeBytes.new(options, client: hub_client)}
+      expect{RandomizeBytes.new(options: options, client: hub_client)}
         .to raise_error(BadRequest, "Please provide number of bytes")
     end
 
     it 'raises error if cohort_id not provided' do
       number_of_bytes = 2
-      expect{RandomizeBytes.new(number_of_bytes: number_of_bytes, cohort_id: nil)}
+      options = {number_of_bytes: number_of_bytes, cohort_id: nil}
+      expect{RandomizeBytes.new(options: options, client: hub_client)}
         .to raise_error(BadRequest, "Please provide cohort id")
     end
 
@@ -27,7 +28,7 @@ module MakersToolbelt
       let(:base_uri){ "http://localhost:3000" }
       let(:options){ {number_of_bytes: number_of_bytes, cohort_id: cohort_id, base_uri: base_uri} }
 
-      subject(:randomize_bytes){ RandomizeBytes.new(options, client: hub_client) }
+      subject(:randomize_bytes){ RandomizeBytes.new(options: options, client: hub_client) }
 
       it 'requests bytes from hub client' do
         allow(response).to receive(:body).and_return("[]")

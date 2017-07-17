@@ -6,4 +6,4 @@ generate_pairs:
   args: [source]
 randomize_bytes:
   class: RandomizeBytes
-  args: [cohort_id, number_of_bytes, base_uri]
+  args: []

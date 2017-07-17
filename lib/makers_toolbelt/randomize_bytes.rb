@@ -1,4 +1,5 @@
 require_relative 'hub_client'
+require_relative 'command_line_questions'
 
 class RandomizeBytes
 
@@ -6,13 +7,15 @@ class RandomizeBytes
   private :number_of_bytes, :cohort_id, :client, :base_uri
   
   DEFAULT_CLIENT = HubClient.new
+  DEFAULT_OPTIONS = CommandLineQuestions
 
-  def initialize(options, client: nil)
-    validate_input(options[:number_of_bytes], options[:cohort_id])
+  def initialize(client: nil, options: nil)
+    options ||= DEFAULT_OPTIONS.randomize_bytes
     @number_of_bytes = options[:number_of_bytes]
     @cohort_id = options[:cohort_id]
     @base_uri = options[:base_uri]
     @client = client || DEFAULT_CLIENT
+    validate_input
   end
 
   def run
@@ -22,7 +25,7 @@ class RandomizeBytes
 
   private
 
-  def validate_input(number_of_bytes, cohort_id)
+  def validate_input
     raise ::BadRequest.new("Please provide cohort id") unless cohort_id
     raise ::BadRequest.new("Please provide number of bytes") unless number_of_bytes
   end
