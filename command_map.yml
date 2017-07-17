@@ -4,3 +4,6 @@ fetch_pull_requests:
 generate_pairs:
   class: GeneratePairs
   args: [source]
+randomize_bytes:
+  class: RandomizeBytes
+  args: [cohort_id, number_of_bytes, base_uri]
