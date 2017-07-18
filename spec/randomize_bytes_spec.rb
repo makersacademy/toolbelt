@@ -5,24 +5,10 @@ module MakersToolbelt
   RSpec.describe RandomizeBytes do
 
     let(:hub_client){ double :hub_client, randomize_bytes: response }
-    let(:response){ double :response, success?: true }
-
-    it 'raises error if number_of_bytes not provided' do
-      cohort_id = 1
-      options = {number_of_bytes: nil, cohort_id: cohort_id}
-      expect{RandomizeBytes.new(options: options, client: hub_client)}
-        .to raise_error(BadRequest, "Please provide number of bytes")
-    end
-
-    it 'raises error if cohort_id not provided' do
-      number_of_bytes = 2
-      options = {number_of_bytes: number_of_bytes, cohort_id: nil}
-      expect{RandomizeBytes.new(options: options, client: hub_client)}
-        .to raise_error(BadRequest, "Please provide cohort id")
-    end
 
     describe 'successful requests' do
 
+      let(:response){ double :response, success?: true }
       let(:cohort_id) { 1 }
       let(:number_of_bytes) { 2 }
       let(:base_uri){ "http://localhost:3000" }
