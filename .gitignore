@@ -1,1 +1,8 @@
+*.swp
+/.bundle/
+/tmp/
+/doc/
+/pkg/
 *.gem
+.DS_Store
+.byebug_history
