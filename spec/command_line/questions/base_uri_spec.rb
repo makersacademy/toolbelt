@@ -34,7 +34,7 @@ module MakersToolbelt
       expect{base_uri.call}.to raise_error("You must enter a valid url e.g. https://example.com")
     end
 
-    it "returns default uri if no ur is specified" do
+    it "returns default uri if no uri is specified" do
       allow(instream).to receive(:gets).and_return("")
 
       expected_option = {base_uri: HubClient::HUB_URL}
