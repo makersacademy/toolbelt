@@ -18,7 +18,7 @@ module MakersToolbelt
           base_uri:        base_uri
         }
 
-        expect(described_class.randomize_bytes).to eq(expected_options)
+        expect(described_class.ask_questions(:randomize_bytes)).to eq(expected_options)
       end
 
     end

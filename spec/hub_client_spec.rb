@@ -16,11 +16,12 @@ module MakersToolbelt
         number_of_bytes = 2
         base_uri = "http://localhost:3000"
         params = {number_of_bytes: number_of_bytes, auth_token: TOKEN}
+        path = "/api/v1/#{cohort_id}/example"
 
-        randomize_bytes = stub_request(:post, request_url(cohort_id: cohort_id, base_uri: base_uri))
+        randomize_bytes = stub_request(:post, request_url(path: path, base_uri: base_uri))
           .with(query: params)
 
-        hub_client.randomize_bytes(number_of_bytes: number_of_bytes, cohort_id: cohort_id, base_uri: base_uri)
+        hub_client.randomize_bytes(number_of_bytes: number_of_bytes, path: path, base_uri: base_uri)
 
         expect(randomize_bytes).to have_been_requested
       end
@@ -29,20 +30,20 @@ module MakersToolbelt
         cohort_id = 1
         number_of_bytes = 2
         params = {number_of_bytes: number_of_bytes, auth_token: TOKEN}
+        path = "/api/v1/#{cohort_id}/example"
 
-        randomize_bytes = stub_request(:post, request_url(cohort_id: cohort_id))
+        randomize_bytes = stub_request(:post, request_url(path: path))
           .with(query: params)
 
-        hub_client.randomize_bytes(number_of_bytes: number_of_bytes, cohort_id: cohort_id)
+        hub_client.randomize_bytes(number_of_bytes: number_of_bytes, path: path)
 
         expect(randomize_bytes).to have_been_requested
       end
 
     end
 
-    def request_url(cohort_id:, base_uri: nil)
+    def request_url(path:, base_uri: nil)
       base_uri = base_uri || HubClient::HUB_URL
-      path = HubClient::RANDOMIZE_BYTES_PATH.call(cohort_id)
       base_uri + path
     end
 

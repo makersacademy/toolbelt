@@ -11,16 +11,16 @@ module MakersToolbelt
 
       RANDOMIZE_BYTES_QUESTIONS = [CohortID, NumberOfBytes, BaseURI]
 
-      def self.randomize_bytes
-        new.ask_questions(*RANDOMIZE_BYTES_QUESTIONS)
+      def self.ask_questions(question_set)
+        new.send(question_set)
       end
 
       def initialize
         @answers = {}
       end
 
-      def ask_questions(*questions)
-        questions.each{ |question| answers.merge!(question.call) }
+      def randomize_bytes
+        RANDOMIZE_BYTES_QUESTIONS.each{ |question| answers.merge!(question.call) }
         answers
       end
     end

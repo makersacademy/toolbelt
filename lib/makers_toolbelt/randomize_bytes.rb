@@ -4,18 +4,20 @@ require_relative 'command_line/interface'
 module MakersToolbelt
   class RandomizeBytes
 
-    attr_reader :client, :options
-    private :client, :options
+    attr_reader :client, :interface
+    private :client, :interface
 
-    DEFAULT_CLIENT = HubClient
-    DEFAULT_OPTIONS = CommandLine::Interface
+    RANDOMIZE_BYTES_PATH = -> (cohort_id) do
+      "/api/v1/cohorts/#{cohort_id}/randomize_bytes" 
+    end
 
-    def initialize(client: nil, options: nil)
-      @options = options || DEFAULT_OPTIONS.randomize_bytes
-      @client = client || DEFAULT_CLIENT.new
+    def initialize(client: nil, interface: nil)
+      @interface = interface || CommandLine::Interface
+      @client = client || HubClient.new
     end
 
     def run
+      @options = interface.ask_questions(:randomize_bytes)
       response = client.randomize_bytes(**options) 
       output(response)
     end
@@ -45,5 +47,12 @@ module MakersToolbelt
       print "\n#{response.code_type} #{response.code} #{response.msg}\n"
     end
 
+    def options
+      {
+        path: RANDOMIZE_BYTES_PATH.call(@options[:cohort_id]),
+        number_of_bytes: @options[:number_of_bytes],
+        base_uri: @options[:base_uri]
+      }
+    end
   end
 end

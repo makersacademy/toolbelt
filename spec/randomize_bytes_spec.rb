@@ -12,16 +12,22 @@ module MakersToolbelt
       let(:cohort_id) { 1 }
       let(:number_of_bytes) { 2 }
       let(:base_uri){ "http://localhost:3000" }
+      let(:path){ RandomizeBytes::RANDOMIZE_BYTES_PATH.call(cohort_id)}
+      let(:interface){ double :interface, ask_questions: options }
       let(:options){ {number_of_bytes: number_of_bytes, cohort_id: cohort_id, base_uri: base_uri} }
 
-      subject(:randomize_bytes){ RandomizeBytes.new(options: options, client: hub_client) }
+      subject(:randomize_bytes){ RandomizeBytes.new(interface: interface, client: hub_client) }
 
       it 'requests bytes from hub client' do
         allow(response).to receive(:body).and_return("[]")
         randomize_bytes.run
-
+        expected_options = {
+          path: path,
+          number_of_bytes: number_of_bytes,
+          base_uri: base_uri,
+        }
         expect(hub_client).to have_received(:randomize_bytes)
-          .with(cohort_id: cohort_id, number_of_bytes: number_of_bytes, base_uri: base_uri)
+          .with(**expected_options)
       end
 
       it 'returns pretty bytes' do
