@@ -6,10 +6,9 @@ module MakersToolbelt
   module CommandLine
     class Interface
 
-      attr_reader :answers, :outstream, :instream
-      private :answers, :outstream, :instream
+      attr_reader :answers
+      private :answers
 
-      HUB_URI = 'https://hub.makersacademy.com'
       RANDOMIZE_BYTES_QUESTIONS = [CohortID, NumberOfBytes, BaseURI]
 
       def self.randomize_bytes
