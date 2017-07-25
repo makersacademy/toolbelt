@@ -1,7 +1,5 @@
 source "https://rubygems.org"
 
-ruby '2.2.3'
+# Specify gem dependencies in makers_toolbelt.gemspec
 
-gem 'octokit'
-gem 'commander'
-gem 'one_factorization'
+gemspec
