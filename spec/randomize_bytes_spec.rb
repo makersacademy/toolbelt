@@ -4,7 +4,7 @@ require 'makers_toolbelt'
 module MakersToolbelt
   RSpec.describe RandomizeBytes do
 
-    let(:hub_client){ double :hub_client, randomize_bytes: response }
+    let(:hub_client){ double :hub_client, post: response }
 
     describe 'successful requests' do
 
@@ -23,10 +23,10 @@ module MakersToolbelt
         randomize_bytes.run
         expected_options = {
           path: path,
-          number_of_bytes: number_of_bytes,
+          params: { number_of_bytes: number_of_bytes },
           base_uri: base_uri,
         }
-        expect(hub_client).to have_received(:randomize_bytes)
+        expect(hub_client).to have_received(:post)
           .with(**expected_options)
       end
 

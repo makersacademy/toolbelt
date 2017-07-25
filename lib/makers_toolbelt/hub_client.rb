@@ -15,15 +15,19 @@ class HubClient
     @auth_token = auth_token || ENV['HUB_AUTH_TOKEN']
   end
 
-  def randomize_bytes(path:, number_of_bytes:, base_uri: nil)
-    uri = base_uri || HUB_URL
-    query = {"number_of_bytes" => number_of_bytes, "auth_token" => auth_token}
-    self.class.post(randomize_bytes_path(uri, path), query: query)
+  def post(path:, params:, base_uri: nil)
+    query = params.merge({"auth_token" => auth_token})
+    headers = {'Content-Type' => 'application/json' } 
+    self.class.post(uri(base_uri, path), query: query, headers: headers)
   end
 
   private
 
-  def randomize_bytes_path(base_uri, path)
+  def uri(base_uri, path)
+    if base_uri.nil? || base_uri.empty? 
+      base_uri = HUB_URL
+    end
     base_uri + path
   end
+
 end

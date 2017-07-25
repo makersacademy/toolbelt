@@ -18,7 +18,7 @@ module MakersToolbelt
 
     def run
       @options = interface.ask_questions(:randomize_bytes)
-      response = client.randomize_bytes(**options) 
+      response = client.post(**options) 
       output(response)
     end
 
@@ -50,7 +50,7 @@ module MakersToolbelt
     def options
       {
         path: RANDOMIZE_BYTES_PATH.call(@options[:cohort_id]),
-        number_of_bytes: @options[:number_of_bytes],
+        params: {number_of_bytes: @options[:number_of_bytes]},
         base_uri: @options[:base_uri]
       }
     end

@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ['Ben Forrest', 'Sam Joseph', 'Daniel Le Dosquet-Bergquist']
   s.email = ['dan@makersacademy.com']
   s.license = 'MIT'
-  s.required_ruby_version = '>= 2.2.3'
+  s.required_ruby_version = '>= 2.4.1'
 
   s.add_runtime_dependency 'octokit'
   s.add_runtime_dependency 'one_factorization'

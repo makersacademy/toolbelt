@@ -1,6 +1,6 @@
-require_relative 'questions/cohort_id'
-require_relative 'questions/number_of_bytes'
-require_relative 'questions/base_uri'
+require_relative 'questions/get_uri'
+require_relative 'questions/get_positive_number'
+require './lib/makers_toolbelt'
 
 module MakersToolbelt
   module CommandLine
@@ -8,8 +8,6 @@ module MakersToolbelt
 
       attr_reader :answers
       private :answers
-
-      RANDOMIZE_BYTES_QUESTIONS = [CohortID, NumberOfBytes, BaseURI]
 
       def self.ask_questions(question_set)
         new.send(question_set)
@@ -20,7 +18,9 @@ module MakersToolbelt
       end
 
       def randomize_bytes
-        RANDOMIZE_BYTES_QUESTIONS.each{ |question| answers.merge!(question.call) }
+        answers[:cohort_id] = GetPositiveNumber.call(question: "Enter cohort id: ")
+        answers[:number_of_bytes] = GetPositiveNumber.call(question: "Enter required number of bytes: ")
+        answers[:base_uri] = GetURI.call(question: "Enter base uri (press enter for #{HubClient::HUB_URL}): ")
         answers
       end
     end
