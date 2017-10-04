@@ -1,5 +1,5 @@
 require_relative './question'
-require './lib/makers_toolbelt'
+require_relative '../../../makers_toolbelt'
 
 module MakersToolbelt
   module CommandLine
@@ -19,4 +19,3 @@ module MakersToolbelt
     end
   end
 end
-

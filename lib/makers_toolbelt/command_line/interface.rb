@@ -1,6 +1,6 @@
 require_relative 'questions/get_uri'
 require_relative 'questions/get_positive_number'
-require './lib/makers_toolbelt'
+require_relative '../../makers_toolbelt'
 
 module MakersToolbelt
   module CommandLine
