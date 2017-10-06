@@ -12,7 +12,13 @@ Gem::Specification.new do |s|
   s.email = ['dan@makersacademy.com']
   s.license = 'MIT'
   s.required_ruby_version = '>= 2.4.1'
-  s.files = Dir['lib/*.rb'] + Dir['lib/makers_toolbelt/*.rb'] + Dir['command_map.yml'] + Dir['lib/makers_toolbelt/command_line/*.rb'] + Dir['lib/makers_toolbelt/command_line/questions/*.rb']
+  s.files = Dir[
+    'command_map.yml',
+    'lib/*.rb',
+    'lib/makers_toolbelt/*.rb',
+    'lib/makers_toolbelt/command_line/*.rb',
+    'lib/makers_toolbelt/command_line/questions/*.rb'
+  ]
 
   s.add_runtime_dependency 'octokit'
   s.add_runtime_dependency 'one_factorization'
