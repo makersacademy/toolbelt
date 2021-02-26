@@ -17,8 +17,15 @@ class GeneratePairs
   def run
     names = GeneratePairs.load_names(source)
     File.open(path, 'w') do |file|
+      
+      if names.count.odd?
+        names << 'Flying solo' # Will pair a lone person up with a dummy 'flying solo' message
+      end
+      
+      pairs = names.one_factorize.shuffle.to_json
+      
+      file.write pairs
       puts "Pair assignments created in file #{path}"
-      file.write names.one_factorize.shuffle.to_json
     end
   end
 
